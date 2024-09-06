@@ -7,21 +7,37 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Migrations\**" />
+	  <Content Remove="Migrations\**" />
+	  <EmbeddedResource Remove="Migrations\**" />
+	  <None Remove="Migrations\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Masa.BuildingBlocks.Dispatcher.Events" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.Contrib.Data.EFCore.MySql" Version="1.0.0" />
+		<PackageReference Include="Masa.Contrib.Data.EFCore.Sqlite" Version="1.0.0" />
 		<PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Data.EFCore.Sqlite" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
 		<PackageReference Include="FluentValidation" Version="10.4.0" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="10.4.0" />
 		<PackageReference Include="Dapr.AspNetCore" Version="1.10.0" />
 		<PackageReference Include="Masa.Utils.Extensions.DependencyInjection" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Service.MinimalAPIs" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Serilog" Version="4.0.1" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Infrastructure\EntityConfigurations\" />
-	  <Folder Include="Migrations\" />
+	  <ProjectReference Include="..\Masa.Admin.Domain\Masa.Admin.Domain.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Infrastructure\Repositories\" />
+	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://alec016.github.io/Custom-Machinery/Json%20Schema/src/main/resources/schemas/custom_machinery_machine.json" /></VisualStudio></ProjectExtensions>
 </Project>

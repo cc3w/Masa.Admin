@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MASA.Admin.Contracts.Order", "MASA.Admin.Contracts.Order\MASA.Admin.Contracts.Order.csproj", "{4E77E819-80FD-43D9-8F75-E3F69CD0A584}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Admin.Application", "Masa.Admin.Application\Masa.Admin.Application.csproj", "{7EB8B61D-7C6C-48BC-AEA1-4545C1C51E15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Admin.Domain", "Masa.Admin.Domain\Masa.Admin.Domain.csproj", "{70327543-E387-4456-B9CC-DFE04FC9CA21}"
@@ -34,14 +32,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Debug|x86.Build.0 = Debug|Any CPU
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Release|x86.ActiveCfg = Release|Any CPU
-		{4E77E819-80FD-43D9-8F75-E3F69CD0A584}.Release|x86.Build.0 = Release|Any CPU
 		{7EB8B61D-7C6C-48BC-AEA1-4545C1C51E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7EB8B61D-7C6C-48BC-AEA1-4545C1C51E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EB8B61D-7C6C-48BC-AEA1-4545C1C51E15}.Debug|x86.ActiveCfg = Debug|Any CPU

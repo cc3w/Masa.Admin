@@ -1,3 +1,19 @@
+using Masa.Admin.WebApi.Infrastructure;
+using Serilog;
+using Serilog.Events;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
+    .Enrich.WithProperty("Application", "XFree.SimpleService")
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,17 +30,17 @@ builder.Services
     {
         options.RegisterValidatorsFromAssemblyContaining<Program>();
     });
-builder.Services.AddMasaDbContext<ShopDbContext>(options =>
+builder.Services.AddMasaDbContext<MasaAdminDbContext>(options =>
 {
     options.UseSqlite("DataSource=masaApp.db");
 });
-builder.Services.AddEventBus(eventBusBuilder =>
+/*builder.Services.AddEventBus(eventBusBuilder =>
 {
     eventBusBuilder.UseMiddleware(typeof(ValidatorMiddleware<>));
     eventBusBuilder.UseMiddleware(typeof(LogMiddleware<>));
-});
+});*/
 
-builder.Services.AddAutoInject();
+/*builder.Services.AddAutoInject();*/
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,7 +49,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     #region MigrationDb
-    using var context = app.Services.CreateScope().ServiceProvider.GetService<ShopDbContext>();
+    using var context = app.Services.CreateScope().ServiceProvider.GetService<MasaAdminDbContext>();
     {
         context!.Database.EnsureCreated();
     }
