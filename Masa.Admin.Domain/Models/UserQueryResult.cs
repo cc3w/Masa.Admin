@@ -1,11 +1,8 @@
 ﻿using Masa.Admin.Domain.enums;
 
-namespace Masa.Admin.Domain.Entities
+namespace Masa.Admin.Domain.Models
 {
-    /// <summary>
-    /// 用户
-    /// </summary>
-    public class User : IFullEntity<Guid, Guid>
+    public record UserQueryResult
     {
         public Guid Id { get; set; }
 
@@ -22,22 +19,22 @@ namespace Masa.Admin.Domain.Entities
         /// <summary>
         /// 用户名
         /// </summary>
-        public string UserName { get; set; } = null!;
+        public string UserName { get; set; }
 
         /// <summary>
         /// 密码
         /// </summary>
-        public string PassWord { get; set; } = null!;
+        public string PassWord { get; set; }
 
         /// <summary>
         /// 盐
         /// </summary>
-        public string Salt { get; set; } = null!;
+        public string Salt { get; set; }
 
         /// <summary>
         /// 姓名
         /// </summary>
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// 电话号码
@@ -52,7 +49,7 @@ namespace Masa.Admin.Domain.Entities
         /// <summary>
         /// 性别
         /// </summary>
-        public GenederType GenederType { get; set; } = GenederType.Unknown;
+        public GenederType GenederType { get; set; }
 
         /// <summary>
         /// 是否启用
@@ -62,21 +59,6 @@ namespace Masa.Admin.Domain.Entities
         /// <summary>
         /// 账号类型
         /// </summary>
-        public AccountType AccountType { get; set; } = AccountType.None;
-
-        public bool IsDeleted { get; set; }
-
-        public Guid Creator { get; set; }
-
-        public DateTime CreationTime { get; set; }
-
-        public Guid Modifier { get; set; }
-
-        public DateTime ModificationTime { get; set; }
-
-        public IEnumerable<(string Name, object Value)> GetKeys()
-        {
-            yield return ("Id", Id);
-        }
+        public AccountType AccountType { get; set; }
     }
 }

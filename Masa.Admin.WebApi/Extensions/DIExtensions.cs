@@ -22,7 +22,7 @@ public static class DIExtensions
             .MinimumLevel.Debug()
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-            .Enrich.WithProperty("Application", "XFree.SimpleService")
+            .Enrich.WithProperty("Application", "MasaAdminWebApi")
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day)
@@ -129,15 +129,6 @@ public static class DIExtensions
             options.UseUoW<MasaAdminDbContext>();
             options.UseRepository<MasaAdminDbContext>();
         });
-
-        //集成事件跨服务传输，服务的发布与订阅不在同一个进程中
-        /*        services.AddIntegrationEventBus(options =>
-                {
-                    options
-                        .UseDapr()//使用Dapr提供pub/sub能力，也可以自行选择其他的
-                        .UseEventLog<MasaAdminDbContext>()//使用基于EFCore的本地消息表
-                        .UseUoW<MasaAdminDbContext>(); //使用工作单元
-                });*/
 
     }
 

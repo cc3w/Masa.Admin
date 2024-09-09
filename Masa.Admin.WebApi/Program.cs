@@ -1,7 +1,6 @@
 using Masa.Admin.WebApi.Extensions;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,14 +23,10 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseRouting();
-
-
-/*app.UseEndpoints(endpoints =>
-{
-    endpoints.MapSubscribeHandler();
-});*/
-
 app.MapControllers();
 
 app.Run();

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Masa.Admin.Domain.Entities;
+using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 
 namespace Masa.Admin.Domain.Repositories
 {
-    internal class IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
+
     }
 }
