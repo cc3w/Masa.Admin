@@ -1,8 +1,9 @@
-﻿using System.Reflection;
+﻿using Microsoft.Extensions.Options;
+using System.Reflection;
 
 namespace Masa.Admin.WebApi.Infrastructure;
 
-public class MasaAdminDbContext : MasaDbContext
+public class MasaAdminDbContext : MasaDbContext<MasaAdminDbContext>
 {
 
     public MasaAdminDbContext(MasaDbContextOptions<MasaAdminDbContext> options) : base(options)

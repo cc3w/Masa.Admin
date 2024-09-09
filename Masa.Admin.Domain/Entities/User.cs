@@ -6,6 +6,9 @@ namespace Masa.Admin.Domain.Entities
     {
         public Guid Id { get; set; }
 
+        public string Name { get; set; }
+
+
         //public Guid? TenantId { get; set; }
 
         public bool IsDeleted { get; set; }
