@@ -27,6 +27,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Masa.Admin.Application\Masa.Admin.Application.csproj" />
+	  <ProjectReference Include="..\Masa.Admin.Common\Masa.Admin.Common.csproj" />
 	  <ProjectReference Include="..\Masa.Admin.Domain\Masa.Admin.Domain.csproj" />
 	</ItemGroup>
 

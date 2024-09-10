@@ -1,12 +1,12 @@
 ﻿using Masa.Admin.Application.Users.Commands;
 using Masa.Admin.Application.Users.Queries;
-using Masa.BuildingBlocks.Authentication.Identity;
-using Masa.BuildingBlocks.Dispatcher.Events;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace Masa.Admin.WebApi.Controllers
 {
+    /// <summary>
+    /// 用户管理控制器
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
@@ -16,6 +16,11 @@ namespace Masa.Admin.WebApi.Controllers
 
         private readonly IUserContext _userContext;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="eventBus"></param>
+        /// <param name="userContext"></param>
         public UserController(IEventBus eventBus, IUserContext userContext)
         {
             _eventBus = eventBus;

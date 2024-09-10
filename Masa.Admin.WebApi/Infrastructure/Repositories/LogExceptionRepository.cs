@@ -3,11 +3,10 @@ using Masa.Admin.Domain.Repositories;
 
 namespace Masa.Admin.WebApi.Infrastructure.Repositories
 {
-    public class UserRepository : Repository<MasaAdminDbContext, User>, IUserRepository
+    public class LogExceptionRepository : Repository<MasaAdminDbContext, LogException>, ILogExceptionRepository
     {
         private readonly MasaAdminDbContext _context;
-
-        public UserRepository(MasaAdminDbContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
+        public LogExceptionRepository(MasaAdminDbContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
         {
             _context = context;
         }

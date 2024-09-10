@@ -1,3 +1,9 @@
-﻿
+﻿global using Masa.BuildingBlocks.Authentication.Identity;
+global using Masa.BuildingBlocks.Data.UoW;
+global using Masa.BuildingBlocks.Dispatcher.Events;
+global using Masa.Contrib.Ddd.Domain.Repository.EFCore;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;

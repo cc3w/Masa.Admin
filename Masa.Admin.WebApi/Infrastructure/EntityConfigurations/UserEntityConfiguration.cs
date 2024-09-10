@@ -1,5 +1,4 @@
 ﻿using Masa.Admin.Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Masa.Admin.WebApi.Infrastructure.EntityConfigurations
 {
