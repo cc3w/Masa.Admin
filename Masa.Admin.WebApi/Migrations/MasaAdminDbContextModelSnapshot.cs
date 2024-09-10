@@ -19,11 +19,29 @@ namespace Masa.Admin.WebApi.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Masa.Admin.Domain.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_Role", (string)null);
+                });
+
             modelBuilder.Entity("Masa.Admin.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
+
+                    b.Property<int>("AccountType")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
@@ -31,7 +49,19 @@ namespace Masa.Admin.WebApi.Migrations
                     b.Property<Guid>("Creator")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid?>("DepartId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("GenederType")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsEnable")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("ModificationTime")
@@ -41,12 +71,29 @@ namespace Masa.Admin.WebApi.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PassWord")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("PositionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_User", (string)null);
+                    b.ToTable("Sys_User", (string)null);
                 });
 #pragma warning restore 612, 618
         }

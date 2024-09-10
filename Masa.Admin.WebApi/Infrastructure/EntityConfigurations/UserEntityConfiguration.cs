@@ -6,7 +6,7 @@ namespace Masa.Admin.WebApi.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("tb_User");
+            builder.ToTable("Sys_User");
             builder.HasKey(x => x.Id);
         }
     }

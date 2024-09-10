@@ -113,7 +113,8 @@ public static class DIExtensions
         //注册MasaDbContext
         services.AddMasaDbContext<MasaAdminDbContext>(optionsBuilder =>
         {
-            optionsBuilder.UseMySql(new MySqlServerVersion("5.7.31"));
+            //optionsBuilder.UseMySql(new MySqlServerVersion("5.7.31"));
+            optionsBuilder.UseMySql(new MySqlServerVersion("8.1.0"));
             //optionsBuilder.UseSqlServer();
             optionsBuilder.UseFilter();
         });
