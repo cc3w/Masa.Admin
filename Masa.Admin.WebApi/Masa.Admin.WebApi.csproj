@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Masa.Contrib.Authentication.Identity" Version="1.2.0-preview.2" />
 		<PackageReference Include="Masa.Contrib.Configuration" Version="1.2.0-preview.2" />
 		<PackageReference Include="Masa.Contrib.Data.Contracts" Version="1.2.0-preview.2" />
 		<PackageReference Include="Masa.Contrib.Data.EFCore.Pomelo.MySql" Version="1.2.0-preview.2" />
@@ -17,6 +18,7 @@
 		<PackageReference Include="Masa.Contrib.Ddd.Domain" Version="1.2.0-preview.2" />
 		<PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="1.2.0-preview.2" />
 		<PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="1.2.0-preview.2" />
+		<PackageReference Include="Masa.Utils.Security.Token" Version="1.2.0-preview.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
 		<PackageReference Include="Serilog" Version="4.0.1" />

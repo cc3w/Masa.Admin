@@ -1,10 +1,10 @@
 ﻿
+using Masa.Admin.Common.Configuraiton;
 using Masa.Admin.WebApi.Infrastructure;
-using Masa.BuildingBlocks.Data.UoW;
 using Masa.BuildingBlocks.Ddd.Domain.Repositories;
-using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
@@ -99,16 +99,51 @@ public static class DIExtensions
     #endregion
 
 
+    #region AllowCros
+    public static void AddAllowCors(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+            {
+                var _appConfig = services.BuildServiceProvider().GetRequiredService<IOptions<AppConfig>>().Value;
+                if (_appConfig.AllowCors.Any(c => c == "*"))
+                {
+                    policy.AllowAnyOrigin();
+                }
+                else
+                {
+                    policy.WithOrigins(_appConfig.AllowCors.ToArray());
+                }
+            });
+        });
+    }
+    #endregion
+
 
     #region Masa
     public static void AddMasaFramework(this IServiceCollection services)
     {
-        services.AddMasaConfiguration();
+        services.AddMasaConfiguration(new List<Assembly> { typeof(Program).Assembly });
 
         //services.AddAutoInject();
 
         //自动映射
         services.AddMapster();
+
+        // 用户身份
+        services.AddMasaIdentity();
+
+        //从配置文件读取Jwt
+        services.AddJwt(options =>
+        {
+            var _appConfig = services.BuildServiceProvider().GetRequiredService<IOptions<AppConfig>>().Value;
+            options.Issuer = _appConfig.JWTConfig.Issuer;
+            options.Audience = _appConfig.JWTConfig.Audience;
+            options.SecurityKey = _appConfig.JWTConfig.SecretKey;
+
+        });
+
 
         //注册MasaDbContext
         services.AddMasaDbContext<MasaAdminDbContext>(optionsBuilder =>
@@ -129,6 +164,8 @@ public static class DIExtensions
             options.UseUoW<MasaAdminDbContext>();
             options.UseRepository<MasaAdminDbContext>();
         });
+
+
 
     }
 

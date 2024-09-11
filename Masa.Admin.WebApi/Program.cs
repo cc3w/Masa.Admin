@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSerilog();
 builder.Services.AddSwagger();
+builder.Services.AddAllowCors();
 builder.Services.AddMasaFramework();
 builder.Services.AddControllers();
 

@@ -6,6 +6,9 @@ using System.Runtime.ExceptionServices;
 
 namespace Masa.Admin.WebApi.Extensions
 {
+    /// <summary>
+    /// 处理异常中间件
+    /// </summary>
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
@@ -14,23 +17,34 @@ namespace Masa.Admin.WebApi.Extensions
 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        private readonly Func<IServiceProvider, IEventBus> _eventBusFactory;
+        private IEventBus _eventBus = default!;
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="next"></param>
+        /// <param name="logger"></param>
+        /// <param name="webHostEnvironment"></param>
         public ExceptionMiddleware(RequestDelegate next,
             ILogger<ExceptionMiddleware> logger,
-            IWebHostEnvironment webHostEnvironment,
-            Func<IServiceProvider, IEventBus> eventBusFactory)
+            IWebHostEnvironment webHostEnvironment)
         {
             _next = next;
             _logger = logger;
             _webHostEnvironment = webHostEnvironment;
-            _eventBusFactory = eventBusFactory;
-
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task InvokeAsync(HttpContext context)
         {
-            ExceptionDispatchInfo exceptionDispatchInfo = null;
+            // 中间件是单例服务，IEventBus是作用域服务（在请求的作用域内创建），所以需要通过 HttpContext.RequestServices 获取服务实例
+            _eventBus = context.RequestServices.GetRequiredService<IEventBus>();
+
+            ExceptionDispatchInfo exceptionDispatchInfo;
             try
             {
                 await _next(context);
@@ -54,7 +68,7 @@ namespace Masa.Admin.WebApi.Extensions
         private async Task HandleExceptionAsync(HttpContext context, ExceptionDispatchInfo exceptionDispatchInfo)
         {
 
-            Guid eventId = await PublishEventAsync(context, exceptionDispatchInfo.SourceException, context.User.Identity?.Name);
+            Guid eventId = await PublishEventAsync(exceptionDispatchInfo.SourceException, context.User.Identity?.Name);
 
             if (context.Response.HasStarted)
             {
@@ -88,13 +102,11 @@ namespace Masa.Admin.WebApi.Extensions
         /// <summary>
         /// 发布异常事件
         /// </summary>
-        /// <param name="context"></param>
         /// <param name="exception"></param>
         /// <param name="operationUser"></param>
         /// <returns></returns>
-        private async Task<Guid> PublishEventAsync(HttpContext context, Exception exception, string? operationUser)
+        private async Task<Guid> PublishEventAsync(Exception exception, string? operationUser)
         {
-            IEventBus eventBus = _eventBusFactory(context.RequestServices);
 
             // 定义异常事件模型
             var command = new CreateLogExceptionCommand()
@@ -111,7 +123,7 @@ namespace Masa.Admin.WebApi.Extensions
             };
 
             // 发布异常事件
-            await eventBus.PublishAsync(command);
+            await _eventBus.PublishAsync(command);
 
             return command.Id;
         }
